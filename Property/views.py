@@ -8,6 +8,7 @@ from django.views.generic.edit import FormView
 from . models import Property,Property_Detail,FavouriteProperty,User
 from . forms import ApartmentTypeForm, PropertyDetailForm, PropertyForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 class AddProperty(CreateView):
     form_class = PropertyForm
@@ -45,7 +46,7 @@ def favouriteList(request):
     new = Property_Detail.objects.filter(favourites=request.user)
     return render(request,'pages/favourites.html',{'listings':new})
 
-
+@login_required
 def favouriteAdd(request,favourite_id):
     post = get_object_or_404(Property_Detail, id=favourite_id)
     if post.favourites.filter(id=request.user.id).exists():
