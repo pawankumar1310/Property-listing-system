@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'all_list' %}">Home</a>
+    <div>
+      <form action ="" method="GET" class="form-inline my-2 my-lg-0">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"  >
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0" >
+
+    {% if user.is_authenticated %}
+      {% if user.role.name == 'Buyer' %}
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+       <ul class="navbar-nav">
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'all_list' %}">All Property <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'favouritelist' %}">Favourite</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Notifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard' %}">Sellers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'changepassword' %}">Change Password</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Welcome {{user.full_name}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+       </ul>
+     </div>
+    {% elif user.role.name == 'Seller' %}
+
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+       <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'all_list' %}">All Property <span class="sr-only">(current)</span></a>
+        </li>
+         <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle navbar-brand" href="{% url 'addproperty' %}" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             Add Property
+           </a>
+           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+             <li><a class="dropdown-item" href="{% url 'addproperty' %}">Add Property</a></li>
+             <li><a class="dropdown-item" href="{% url 'addapartmenttype' %}">Add Apartment Type</a></li>
+             <li><a class="dropdown-item" href="{% url 'addpropertydetail' %}">Add Property Details</a></li>
+           </ul>
+         </li>
+       </ul>
+     </div>
+     <li class="nav-item">
+      <a class="nav-link" href="{% url 'dashboard' %}">Sellers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Account</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'changepassword' %}">Change Password</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link active" href="#">Welcome {{user.full_name}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+    </li>
+    {% endif %}
+    {% else %}
+        <a class="nav-link" href="{% url 'register' %}">
+          <i class="fas fa-user-plus"></i> Register</a
+        >
+      </li>
+        <a class="nav-link" href="{% url 'login' %}">
+          <i class="fas fa-sign-in-alt"></i>
+          Login</a >
+    {% endif %}
+      </ul>
+    </div>
+  </nav>

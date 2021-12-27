@@ -1,0 +1,107 @@
+
+{% extends 'property/base.html' %}
+
+{% load humanize %}
+{% block title %}  Welcome {% endblock %}
+
+{% block content %}
+<!-- alerts -->
+{% include 'partials/_alert.html' %}
+
+<!-- Listings -->
+<section id="listings" class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-3">Latest Properties</h3>
+    <div class="row">
+
+      {% if listings %}
+      {% for listing in listings %}
+
+      <!-- Listing 1 -->
+      <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="{{listing.picture.url}}" alt="" />
+            <div class="card-img-overlay">
+              <h2>
+                <span class="badge badge-secondary text-white">Rs.{{ listing.price | intcomma}}</span>
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary">{{listing.property.title}}</h4>
+                <p>
+                  <i class="fas fa-map-marker text-secondary"></i> {{listing.property.city}}, {{listing.property.state}}, {{listing.property.pincode}}
+                </p>
+                <a href="{% url 'favouriteadd' listing.id %}" class="btn btn-danger ">Add to Favourite</a>
+              </div>
+              <hr />
+              <div class="row py-2 text-secondary">
+                <div class="col-6">
+                  <i class="fas fa-th-large"></i> {{listing.apartment_type.name}}
+                </div>
+                <div class="col-6">
+                  <i class="fas fa-th-large"></i> Sqft: {{listing.sqft}}
+                </div>
+              </div>
+              <hr />
+              <div class="row py-2 text-secondary">
+                <div class="col-6"><i class="fas fa-user"> </i> {{listing.property.seller.full_name}}</div>
+              </div>
+              <div class="row text-secondary pb-2">
+                <div class="col-6"><i class="fas fa-clock"></i> {{ listing.created_at | timesince }}</div>
+              </div>
+              <hr />
+              <hr />
+              <a href="{% url 'propertydetails' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+      {% else %}
+      <div class="col-md-12">
+      <p>No Property Available</p>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+  <section id="services" class="py-5 bg-secondary text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <i class="fas fa-comment fa-4x mr-4"></i>
+          <hr />
+          <h3>Consulting Services</h3>
+          <p>
+            The service may involve either advisory or implementation services. ...
+            These firms offer all sorts of different services, spanning across
+            countless fields, disciplines and sectors.
+          </p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-home fa-4x mr-4"></i>
+          <hr />
+          <h3>Property Management</h3>
+          <p>
+            Property management is the operation, control, maintenance, and
+            oversight of real estate and physical property.
+            This can include residential, commercial, and land real estate.
+          </p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-suitcase fa-4x mr-4"></i>
+          <hr />
+          <h3>Renting & Selling</h3>
+          <p>
+            As 99acres.com grows day by day as a property listing website
+            and marketplace, we are here to help our partner sellers
+            to make the most of this opportunity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

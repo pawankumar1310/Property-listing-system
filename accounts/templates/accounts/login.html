@@ -1,0 +1,25 @@
+{% extends 'property/base.html' %}
+
+{% block content %}
+<section class="Form my-2 mx-5" style="background-color: antiquewhite;"">
+<div class="container">
+  <div class="row">
+   <form action="" method="POST">
+     {% csrf_token %}
+    <h4 style="color: rgb(44, 115, 247);">Log in your account</h4>
+      {% for fm in form %}
+        <div class="form-group">
+         {{fm.label_tag}} {{fm}} <small class="text-warning">{{fm.errors|striptags}}</small>
+        </div>
+        {% endfor %}
+     <div class="form-row">
+      <button>Log in</button>
+     </div>
+     <a href="{% url 'password_reset' %}">Forgot Password</a>
+     <p>Don't have an account?<a href="{% url 'register' %}">Register here</a></p>
+   </form>
+  </div>
+
+</div>
+</section>
+{% endblock %}

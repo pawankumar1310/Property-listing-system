@@ -1,0 +1,25 @@
+
+{% extends 'property/base.html' %}
+
+{% block content %}
+
+<section class="Form my-2 mx-5" style="background-color: antiquewhite;">
+    <h1>Add Apartment Type</h1>
+    <div class="container">
+      <div class="row">
+        {% if user.is_authenticated %}
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button>Add</button>
+        </form>
+        {% else %}
+        You are not authorized to view this page...
+        {% endif %}
+      </div>
+    </div>
+    </section>
+{% endblock %}
+
+
+
