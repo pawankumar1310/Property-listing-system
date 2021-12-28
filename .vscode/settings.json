@@ -4,6 +4,7 @@
         "favourites",
         "gunicorn",
         "REFERER",
+        "sqft",
         "wsgi"
     ]
 }

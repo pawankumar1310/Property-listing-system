@@ -54,6 +54,6 @@ venv/
 media/
 __pycache__/
 db.sqlite3
-static
 /.env
 /property_env
+/Property/static
