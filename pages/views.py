@@ -12,18 +12,12 @@ from django.core.mail import message
 from django.conf import settings
 from django.views.generic import DetailView
 from .forms import EmailForm
-
+from django.core.paginator import Paginator
 
 
 
 # Create your views here.
 def home(request):
-#     posts = Blog.objects.all().order_by('id')
-#     paginator = Paginator(posts,2,orphans=1)
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#     return render(request,'blog/home.html',{'page_obj':page_obj})
-
     properties = Property_Detail.objects.select_related('property')
     context ={
         'listings':properties,

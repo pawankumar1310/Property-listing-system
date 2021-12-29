@@ -3,6 +3,7 @@
 {% block content %}
 {% include 'partials/_alert.html' %}
 
+
 {% if user.is_authenticated and user.role.name == 'Seller' %}
 {% include 'pages/sellerdashboard.html' %}
 
@@ -55,17 +56,16 @@
           </div>
         </div>
       </div>
-
       {% endfor %}
       {% else %}
       <div class="col-md-12">
         <p>No Property Available</p>
       </div>
       {% endif %}
-
     </div>
   </div>
 </section>
+
 {% endif %}
 
 {% endblock %}
